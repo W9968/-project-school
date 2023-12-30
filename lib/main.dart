@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: FlexThemeData.light(
         scheme: FlexScheme.cyanM3,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-        blendLevel: 7,
+        blendLevel: 0,
         subThemesData: const FlexSubThemesData(
           blendOnLevel: 10,
           blendOnColors: false,
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       darkTheme: FlexThemeData.dark(
         scheme: FlexScheme.cyanM3,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-        blendLevel: 13,
+        blendLevel: 0,
         subThemesData: const FlexSubThemesData(
           blendOnLevel: 20,
           useTextTheme: true,

@@ -16,11 +16,18 @@ class _ProjectListMainState extends State<ProjectListMain> {
       drawer: const SideDrawer(selectedIndex: 1),
       appBar: AppBar(
         title: const Text('Project List'),
+        shadowColor: Theme.of(context).colorScheme.shadow,
       ),
       body: Container(
+        padding: const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
         width: double.infinity,
         height: double.infinity,
-        child: Column(children: [ProjectCard()]),
+        child: ListView(
+          children: const <Widget>[
+            ProjectCard(),
+            ProjectCard(),
+          ],
+        ),
       ),
     );
   }
