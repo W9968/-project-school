@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-/* imports */
-import 'package:frema/screen/projects-list.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:frema/screen/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'School Project Management App',
       debugShowCheckedModeBanner: false,
-      home: const ProjectListMain(),
+      home: const Dashboard(),
+
       theme: FlexThemeData.light(
         scheme: FlexScheme.cyanM3,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
