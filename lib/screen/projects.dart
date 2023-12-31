@@ -13,7 +13,7 @@ class _ProjectState extends State<Project> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SideDrawer(screenIndex: 1),
+      drawer: const SideDrawer(),
       appBar: AppBar(
         title: const Text('Project List'),
         shadowColor: Theme.of(context).colorScheme.shadow,

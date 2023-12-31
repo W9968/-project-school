@@ -12,7 +12,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SideDrawer(screenIndex: 0),
+      drawer: const SideDrawer(),
       appBar: AppBar(
         title: const Text('Dashboard'),
         shadowColor: Theme.of(context).colorScheme.shadow,
