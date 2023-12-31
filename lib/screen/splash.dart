@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:frema/screen/dashboard.dart';
+import 'package:frema/screen/login.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,14 +8,11 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.leanBack,
-    );
+  
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
@@ -26,8 +22,11 @@ class SplashScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 1.40,
             width: MediaQuery.of(context).size.width,
             child: Center(
-              child: Image.network("https://i.ibb.co/BtkYw4T/Saly-10.png",
-                  width: 325, height: 325, fit: BoxFit.cover),
+              child: Image.network(
+                  "https://cdn.dribbble.com/userupload/4109840/file/original-b8c4b88376882144ffbb139c8dd68074.jpg?resize=1200x900",
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 1.40,
+                  fit: BoxFit.cover),
             ),
           ),
           const SizedBox(height: 32),
@@ -39,7 +38,7 @@ class SplashScreen extends StatelessWidget {
                   Text(
                     "Get More Done!",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.inter(
                       fontSize: 28,
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
@@ -48,7 +47,7 @@ class SplashScreen extends StatelessWidget {
                   Text(
                     "Organize your freelanding client projects With Frema and focus on onboarding more clients.",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.inter(
                       fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.w400,
@@ -62,7 +61,7 @@ class SplashScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const Dashboard(),
+                  builder: (context) => const Login(),
                 ));
               },
               style: ElevatedButton.styleFrom(
@@ -75,7 +74,7 @@ class SplashScreen extends StatelessWidget {
               child: Text(
                 "Get Started",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.inter(
                   fontSize: 14,
                   color: Colors.white,
                   fontWeight: FontWeight.w400,

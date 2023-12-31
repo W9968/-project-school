@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DrawerHaeaderCust extends StatelessWidget {
   const DrawerHaeaderCust({super.key});
@@ -12,8 +13,9 @@ class DrawerHaeaderCust extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Account',
-                style: TextStyle(
-                    fontSize: 16,
+                style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.onSecondaryContainer)),
             const Padding(padding: EdgeInsets.all(8.0)),
             Row(
@@ -38,13 +40,15 @@ class DrawerHaeaderCust extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('John Doe',
-                              style: TextStyle(
+                              style: GoogleFonts.inter(
                                   fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                   color:
                                       Theme.of(context).colorScheme.onSurface)),
-                          const Text(
+                          Text(
                             '@working',
-                            style: TextStyle(fontSize: 12),
+                            style: GoogleFonts.inter(
+                                fontSize: 14, fontWeight: FontWeight.w400),
                           )
                         ]),
                   ],
@@ -60,8 +64,9 @@ class DrawerHaeaderCust extends StatelessWidget {
                   child: Row(
                     children: [
                       Text('Sign Out',
-                          style: TextStyle(
-                              fontSize: 13,
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
                               color: Theme.of(context)
                                   .colorScheme
                                   .onSecondaryContainer)),

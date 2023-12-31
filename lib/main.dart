@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       theme: MaterialTheme().light(),
       darkTheme: MaterialTheme().dark(),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ThemeSwitcher extends StatefulWidget {
   const ThemeSwitcher({super.key});
@@ -19,8 +20,9 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Settings',
-                style: TextStyle(
-                    fontSize: 16,
+                style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.onSecondaryContainer)),
             const Padding(padding: EdgeInsets.all(8.0)),
             Row(
@@ -37,8 +39,9 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
                     ),
                     const Padding(padding: EdgeInsets.only(right: 10.0)),
                     Text('Dark Mode',
-                        style: TextStyle(
-                            fontSize: 16,
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                             color: Theme.of(context).colorScheme.onSurface)),
                   ],
                 ),
