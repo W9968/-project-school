@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 
 class Input extends StatelessWidget {
-  const Input({super.key});
+  final String placeholder;
+
+  const Input({
+    super.key,
+    required this.placeholder,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.text,
-      decoration: const InputDecoration(
-        labelText: "Username",
+      decoration: InputDecoration(
+        hintText: placeholder,
         filled: true,
-        hintText: "Enter your username",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(18.0)),
+        fillColor: Theme.of(context).colorScheme.surfaceVariant,
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
       // validator: validator,
