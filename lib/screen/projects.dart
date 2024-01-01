@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frema/atoms/project-card.dart';
+import 'package:frema/atoms/project-floating-button.dart';
 import 'package:frema/composable/side-drawer.dart';
 
 class Project extends StatefulWidget {
@@ -18,6 +19,7 @@ class _ProjectState extends State<Project> {
         title: const Text('Project List'),
         shadowColor: Theme.of(context).colorScheme.shadow,
       ),
+      floatingActionButton: const FloatingButton(),
       body: Container(
         padding: const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
         width: double.infinity,

@@ -96,9 +96,8 @@ class ProjectCard extends StatelessWidget {
                           child: Center(
                               child: Text(phase.toString(),
                                   style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1,
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.w500
                                   ))),
                         )
                       ],
