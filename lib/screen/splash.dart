@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frema/screen/login.dart';
 
-import 'package:google_fonts/google_fonts.dart';
+
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -33,12 +33,12 @@ class SplashScreen extends StatelessWidget {
           Container(
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
+              child: const Column(
                 children: [
                   Text(
                     "Get More Done!",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
                       fontSize: 28,
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
@@ -47,7 +47,7 @@ class SplashScreen extends StatelessWidget {
                   Text(
                     "Organize your freelanding client projects With Frema and focus on onboarding more clients.",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
                       fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.w400,
@@ -71,10 +71,10 @@ class SplashScreen extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.elliptical(10.0, 10.0)),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Get Started",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
+                style: TextStyle(
                   fontSize: 14,
                   color: Colors.white,
                   fontWeight: FontWeight.w400,

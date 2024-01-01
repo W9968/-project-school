@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frema/screen/dashboard.dart';
 import 'package:frema/screen/projects.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class DrawerNavigationItems extends StatelessWidget {
   const DrawerNavigationItems({super.key});
@@ -21,7 +21,7 @@ class DrawerNavigationItems extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Items',
-                style: GoogleFonts.inter(
+                style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.onSecondaryContainer)),
@@ -30,7 +30,7 @@ class DrawerNavigationItems extends StatelessWidget {
               (e) => ListTile(
                 trailing: e.icon,
                 title: Text(e.title,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     )),

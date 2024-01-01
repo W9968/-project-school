@@ -9,6 +9,7 @@ class Input extends StatelessWidget {
       keyboardType: TextInputType.text,
       decoration: const InputDecoration(
         labelText: "Username",
+        filled: true,
         hintText: "Enter your username",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(18.0)),

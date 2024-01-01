@@ -23,9 +23,42 @@ class _ProjectState extends State<Project> {
         width: double.infinity,
         height: double.infinity,
         child: ListView(
-          children: const <Widget>[
-            ProjectCard(),
-            ProjectCard(),
+          children: <Widget>[
+            ProjectCard(
+              cardTitle: 'Project 1',
+              cardSubtitle: 'Subtitle 1',
+              cardStatus: CardStatus.active,
+              startDate: DateTime(2023, 1, 1),
+              endDate: DateTime(2023, 2, 5),
+            ),
+            ProjectCard(
+              cardTitle: 'Project 2',
+              cardSubtitle: 'Subtitle 2',
+              cardStatus: CardStatus.onHold,
+              startDate: DateTime(2023, 1, 1),
+              endDate: DateTime(2024, 2, 5),
+            ),
+            ProjectCard(
+              cardTitle: 'Project 3',
+              cardSubtitle: 'Subtitle 3',
+              cardStatus: CardStatus.inactive,
+              startDate: DateTime(2023, 1, 1),
+              endDate: DateTime(2023, 6, 5),
+            ),
+            ProjectCard(
+              cardTitle: 'Project 4',
+              cardSubtitle: 'Subtitle 4',
+              cardStatus: CardStatus.completed,
+              startDate: DateTime(2023, 1, 1),
+              endDate: DateTime(2023, 2, 29),
+            ),
+            ProjectCard(
+              cardTitle: 'Project 5',
+              cardSubtitle: 'Subtitle 5',
+              cardStatus: CardStatus.preparing,
+              startDate: DateTime(2023, 1, 1),
+              endDate: DateTime(2023, 1, 15),
+            ),
           ],
         ),
       ),

@@ -23,8 +23,14 @@ class MyApp extends StatelessWidget {
       title: 'School Project Management App',
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
-      theme: MaterialTheme().light(),
-      darkTheme: MaterialTheme().dark(),
+      theme: ThemeData.from(
+        useMaterial3: true,
+        colorScheme: MaterialTheme.lightScheme().toColorScheme(),
+      ),
+      darkTheme: ThemeData.from(
+        useMaterial3: true,
+        colorScheme: MaterialTheme.darkScheme().toColorScheme(),
+      ),
       themeMode: ThemeMode.light,
     );
   }

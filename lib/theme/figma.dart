@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 
 class MaterialTheme {
   
@@ -224,6 +225,7 @@ static const Color dynamicSysDarkPrimary = Color(0xff91d2d5);
         useMaterial3: true,
         brightness: colorScheme.brightness,
         colorScheme: colorScheme,
+        fontFamily: GoogleFonts.inter().fontFamily,
         scaffoldBackgroundColor: colorScheme.background,
         canvasColor: colorScheme.surface,
       );
@@ -370,9 +372,11 @@ extension MaterialSchemeUtils on MaterialScheme {
       inverseSurface: inverseSurface,
       onInverseSurface: inverseOnSurface,
       inversePrimary: inversePrimary,
+        surfaceTint: surfaceTint
     );
   }
 }
+
 
 class ExtendedColor {
   final Color seed, value;
