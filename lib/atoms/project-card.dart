@@ -7,6 +7,7 @@ class ProjectCard extends StatelessWidget {
   final DateTime startDate;
   final DateTime endDate;
   final int phase;
+  final String stack;
 
   const ProjectCard({
     Key? key,
@@ -16,6 +17,7 @@ class ProjectCard extends StatelessWidget {
     required this.startDate,
     required this.endDate,
     this.phase = 1,
+    required this.stack,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,6 @@ class ProjectCard extends StatelessWidget {
     String durationText = _getDurationText(duration);
 
     return Card(
-      shadowColor: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -38,6 +39,13 @@ class ProjectCard extends StatelessWidget {
               style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             ),
             subtitle: Text(cardSubtitle),
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: SizedBox(
+              width: double.infinity,
+              child: Text(stack),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,

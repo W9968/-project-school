@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: MaterialTheme.darkScheme().toColorScheme(),
       ),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
     );
   }
 }

@@ -30,6 +30,8 @@ class _ProjectState extends State<Project> {
               cardStatus: CardStatus.active,
               startDate: DateTime(2023, 1, 1),
               endDate: DateTime(2023, 2, 5),
+              phase: 1,
+              stack: 'React, NodeJS, MongoDB',
             ),
             ProjectCard(
               cardTitle: 'Project 2',
@@ -37,6 +39,8 @@ class _ProjectState extends State<Project> {
               cardStatus: CardStatus.onHold,
               startDate: DateTime(2023, 1, 1),
               endDate: DateTime(2024, 2, 5),
+              phase: 2,
+              stack: 'React Native, Laravel, TailwindCSS',
             ),
             ProjectCard(
               cardTitle: 'Project 3',
@@ -44,6 +48,8 @@ class _ProjectState extends State<Project> {
               cardStatus: CardStatus.inactive,
               startDate: DateTime(2023, 1, 1),
               endDate: DateTime(2023, 6, 5),
+              phase: 3,
+              stack: 'Flutter, Firebase, Google Cloud',
             ),
             ProjectCard(
               cardTitle: 'Project 4',
@@ -51,6 +57,8 @@ class _ProjectState extends State<Project> {
               cardStatus: CardStatus.completed,
               startDate: DateTime(2023, 1, 1),
               endDate: DateTime(2023, 2, 29),
+              phase: 4,
+              stack: 'React, NodeJS, MongoDB',
             ),
             ProjectCard(
               cardTitle: 'Project 5',
@@ -58,6 +66,8 @@ class _ProjectState extends State<Project> {
               cardStatus: CardStatus.preparing,
               startDate: DateTime(2023, 1, 1),
               endDate: DateTime(2023, 1, 15),
+              phase: 5,
+              stack: 'React Native, Laravel, TailwindCSS',
             ),
           ],
         ),
