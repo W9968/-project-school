@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:frema/cron/app-theme-notifier.dart';
+import 'package:provider/provider.dart';
 
 class ThemeSwitcher extends StatefulWidget {
   const ThemeSwitcher({super.key});
@@ -9,10 +10,12 @@ class ThemeSwitcher extends StatefulWidget {
 }
 
 class _ThemeSwitcherState extends State<ThemeSwitcher> {
-  bool isDarkMode = true;
 
   @override
   Widget build(BuildContext context) {
+
+    bool isDarkMode = Provider.of<AppThemeNotifier>(context).isDarkTheme;
+
     return Container(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -50,6 +53,15 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
                     onChanged: (bool value) {
                       setState(() {
                         isDarkMode = value;
+
+                        if (isDarkMode) {
+                          Provider.of<AppThemeNotifier>(context, listen: false)
+                              .switchThemeDark();
+                        } else {
+                          Provider.of<AppThemeNotifier>(context, listen: false)
+                              .switchThemeLight();
+                        }
+
                       });
                     })
               ],
