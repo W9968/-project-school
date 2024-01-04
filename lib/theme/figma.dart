@@ -225,7 +225,7 @@ static const Color dynamicSysDarkPrimary = Color(0xff91d2d5);
         useMaterial3: true,
         brightness: colorScheme.brightness,
         colorScheme: colorScheme,
-        fontFamily: GoogleFonts.inter().fontFamily,
+        fontFamily: GoogleFonts.lato().fontFamily,
         scaffoldBackgroundColor: colorScheme.background,
         canvasColor: colorScheme.surface,
       );

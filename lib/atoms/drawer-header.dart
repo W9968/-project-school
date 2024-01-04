@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frema/screen/login.dart';
 
 class DrawerHaeaderCust extends StatelessWidget {
   const DrawerHaeaderCust({super.key});
@@ -44,7 +45,7 @@ class DrawerHaeaderCust extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                   color:
                                       Theme.of(context).colorScheme.onSurface)),
-                          Text(
+                          const Text(
                             '@working',
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w400),
@@ -59,7 +60,10 @@ class DrawerHaeaderCust extends StatelessWidget {
                     backgroundColor: MaterialStatePropertyAll<Color>(
                         Theme.of(context).colorScheme.secondaryContainer),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  },
                   child: Row(
                     children: [
                       Text('Sign Out',

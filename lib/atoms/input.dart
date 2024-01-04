@@ -4,11 +4,14 @@ class Input extends StatelessWidget {
   final String? label;
   final String placeholder;
   final IconData? icon;
+
   final TextInputType? keyboardType;
   final bool isPassword;
 
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
+
+  final String? animatedLabel;
 
   const Input({
     Key? key,
@@ -19,6 +22,7 @@ class Input extends StatelessWidget {
     this.isPassword = false,
     this.validator,
     this.onSaved,
+    this.animatedLabel,
   }) : super(key: key);
 
   @override
@@ -58,6 +62,7 @@ class Input extends StatelessWidget {
             filled: true,
             isDense: true,
             hintText: placeholder,
+            label: animatedLabel != null ? Text(animatedLabel!) : null,
             prefixIcon: icon != null ? Icon(icon) : null,
           ),
           validator: validator,

@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:frema/atoms/input.dart';
-import 'package:frema/models/user-login.dart';
+import 'package:frema/models/user-register.dart';
 import 'package:frema/screen/dashboard.dart';
-import 'package:frema/screen/register.dart';
+import 'package:frema/screen/login.dart';
 
-
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final key = GlobalKey<FormState>();
-  var userLogin = UserLogin();
+  var userRegister = UserRegister();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              height: 200.0,
+              height: 124.0,
               width: MediaQuery.of(context).size.width,
               padding:
                   const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Sign in to your Account",
+                    "Create your account",
                     style: TextStyle(
                       fontSize: 32.0,
                       fontWeight: FontWeight.bold,
@@ -41,7 +41,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   Text(
-                    "Enter your details below to continue.",
+                    "Enter your details below to create your account.",
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -60,6 +60,19 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: <Widget>[
                     Input(
+                      animatedLabel: "Username",
+                      placeholder: 'Enter your name',
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Username is required';
+                        }
+                        return null;
+                      },
+                      onSaved: (String? value) =>
+                          userRegister.setUsername = value!,
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 8.0)),
+                    Input(
                       animatedLabel: "Email",
                       placeholder: 'Enter your email',
                       validator: (String? value) {
@@ -68,9 +81,10 @@ class _LoginState extends State<Login> {
                         }
                         return null;
                       },
-                      onSaved: (String? value) => userLogin.setEmail = value!,
+                      onSaved: (String? value) =>
+                          userRegister.setEmail = value!,
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 12.0)),
+                    const Padding(padding: EdgeInsets.only(top: 8.0)),
                     Input(
                       animatedLabel: "Password",
                       placeholder: 'Enter your password',
@@ -82,7 +96,7 @@ class _LoginState extends State<Login> {
                       },
                       isPassword: true,
                       onSaved: (String? value) =>
-                          userLogin.setPassword = value!,
+                          userRegister.setPassword = value!,
                     ),
                     const Padding(padding: EdgeInsets.only(top: 32.0)),
                     SizedBox(
@@ -109,7 +123,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         child: Text(
-                          "Sign in",
+                          "Sign up",
                           style: TextStyle(
                             fontSize: 16,
                             color: Theme.of(context).colorScheme.onPrimary,
@@ -128,18 +142,18 @@ class _LoginState extends State<Login> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account? "),
+                  const Text("Already have an account? "),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
-                              const Register(), // Replace with your actual Signup screen
+                              const Login(), // Replace with your actual Signup screen
                         ),
                       );
                     },
                     child: Text(
-                      "Sign up",
+                      "Sign in",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.bold,
