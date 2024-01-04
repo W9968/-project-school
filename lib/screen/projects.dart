@@ -29,13 +29,12 @@ class _ProjectState extends State<Project> {
 
     print("rows $rows");
 
-    rows.forEach((element) {
+    for (var element in rows) {
       projects.add(Freelance.fromMap(element));
-    });
+    }
 
     return projects;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +44,19 @@ class _ProjectState extends State<Project> {
         title: const Text('Project List'),
         shadowColor: Theme.of(context).colorScheme.shadow,
       ),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: const FloatingButton(),
         body: RefreshIndicator(
-          onRefresh: _queryData,
+        onRefresh: () {
+          setState(() {
+            _projectsFuture = _queryData();
+          });
+          return _projectsFuture;
+        },
           child: Container(
-        padding: const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
-        width: double.infinity,
-        height: double.infinity,
+          padding: const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
+          width: double.infinity,
+          height: double.infinity,
             child: FutureBuilder<List<Freelance>>(
               future: _projectsFuture,
               builder: (context, snapshot) {
@@ -77,11 +82,9 @@ class _ProjectState extends State<Project> {
                     },
                   );
                 }
-              },
+              }),
         ),
       ),
-        )
     );
   }
 }
-
