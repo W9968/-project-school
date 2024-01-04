@@ -1,16 +1,42 @@
+import 'package:frema/main.dart';
 import 'package:flutter/material.dart';
 import 'package:frema/atoms/project-card.dart';
 import 'package:frema/atoms/project-floating-button.dart';
 import 'package:frema/composable/side-drawer.dart';
+import 'package:frema/models/freelance.dart';
 
 class Project extends StatefulWidget {
-  const Project({super.key});
+  const Project({Key? key}) : super(key: key);
 
   @override
   State<Project> createState() => _ProjectState();
 }
 
 class _ProjectState extends State<Project> {
+  late Future<List<Freelance>> _projectsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _projectsFuture = _queryData();
+  }
+
+  Future<List<Freelance>> _queryData() async {
+    List<Freelance> projects = [];
+
+    final List<Map<String, dynamic>> rows =
+        await supabase.from('datatable_project').select('*');
+
+    print("rows $rows");
+
+    rows.forEach((element) {
+      projects.add(Freelance.fromMap(element));
+    });
+
+    return projects;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,60 +46,42 @@ class _ProjectState extends State<Project> {
         shadowColor: Theme.of(context).colorScheme.shadow,
       ),
       floatingActionButton: const FloatingButton(),
-      body: Container(
+        body: RefreshIndicator(
+          onRefresh: _queryData,
+          child: Container(
         padding: const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
         width: double.infinity,
         height: double.infinity,
-        child: ListView(
-          children: <Widget>[
-            ProjectCard(
-              cardTitle: 'Project 1',
-              cardSubtitle: 'Subtitle 1',
-              cardStatus: CardStatus.active,
-              startDate: DateTime(2023, 1, 1),
-              endDate: DateTime(2023, 2, 5),
-              phase: 1,
-              stack: 'React, NodeJS, MongoDB',
-            ),
-            ProjectCard(
-              cardTitle: 'Project 2',
-              cardSubtitle: 'Subtitle 2',
-              cardStatus: CardStatus.onHold,
-              startDate: DateTime(2023, 1, 1),
-              endDate: DateTime(2024, 2, 5),
-              phase: 2,
-              stack: 'React Native, Laravel, TailwindCSS',
-            ),
-            ProjectCard(
-              cardTitle: 'Project 3',
-              cardSubtitle: 'Subtitle 3',
-              cardStatus: CardStatus.inactive,
-              startDate: DateTime(2023, 1, 1),
-              endDate: DateTime(2023, 6, 5),
-              phase: 3,
-              stack: 'Flutter, Firebase, Google Cloud',
-            ),
-            ProjectCard(
-              cardTitle: 'Project 4',
-              cardSubtitle: 'Subtitle 4',
-              cardStatus: CardStatus.completed,
-              startDate: DateTime(2023, 1, 1),
-              endDate: DateTime(2023, 2, 29),
-              phase: 4,
-              stack: 'React, NodeJS, MongoDB',
-            ),
-            ProjectCard(
-              cardTitle: 'Project 5',
-              cardSubtitle: 'Subtitle 5',
-              cardStatus: CardStatus.preparing,
-              startDate: DateTime(2023, 1, 1),
-              endDate: DateTime(2023, 1, 15),
-              phase: 5,
-              stack: 'React Native, Laravel, TailwindCSS',
-            ),
-          ],
+            child: FutureBuilder<List<Freelance>>(
+              future: _projectsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  List<Freelance> projects = snapshot.data ?? [];
+                  return ListView.builder(
+                    itemCount: projects.length,
+                    itemBuilder: (context, index) {
+                      Freelance project = projects[index];
+                      return ProjectCard(
+                        cardTitle: project.getTitle,
+                        cardSubtitle: project.getSubTitle,
+                        cardStatus: project.getStatus,
+                        startDate: DateTime.parse(project.getStartDate),
+                        endDate: DateTime.parse(project.getEndDate),
+                        stack: project.getStack,
+                        phase: project.getPhase,
+                      );
+                    },
+                  );
+                }
+              },
         ),
       ),
+        )
     );
   }
 }
+

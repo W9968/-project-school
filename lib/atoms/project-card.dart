@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProjectCard extends StatelessWidget {
   final String cardTitle;
   final String cardSubtitle;
-  final CardStatus cardStatus;
+  final String cardStatus;
   final DateTime startDate;
   final DateTime endDate;
   final int phase;
@@ -13,7 +13,7 @@ class ProjectCard extends StatelessWidget {
     Key? key,
     required this.cardTitle,
     required this.cardSubtitle,
-    this.cardStatus = CardStatus.preparing,
+    this.cardStatus = "",
     required this.startDate,
     required this.endDate,
     this.phase = 1,
@@ -26,6 +26,7 @@ class ProjectCard extends StatelessWidget {
     String durationText = _getDurationText(duration);
 
     return Card(
+      shadowColor: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -59,16 +60,18 @@ class ProjectCard extends StatelessWidget {
                           child: Row(
                             children: [
                               Icon(
-                                _getIconBasedOnStatus(cardStatus),
-                                color: _getStatusColor(cardStatus, context),
+                                _getIconBasedOnStatus(_parseStatus(cardStatus)),
+                                color: _getStatusColor(
+                                    _parseStatus(cardStatus), context),
                                 size: 16,
                               ),
                               const SizedBox(width: 4),
-                              Text(cardStatus.toString().split('.').last,
+                              Text(cardStatus,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
-                                    color: _getStatusColor(cardStatus, context),
+                                    color: _getStatusColor(
+                                        _parseStatus(cardStatus), context),
                                   ))
                             ],
                           ))),
@@ -176,6 +179,25 @@ class ProjectCard extends StatelessWidget {
       return '${duration.inDays} ${duration.inDays == 1 ? 'day' : 'days'}';
     }
   }
+
+  CardStatus _parseStatus(String status) {
+    switch (status) {
+      case 'preparing':
+        return CardStatus.preparing;
+      case 'active':
+        return CardStatus.active;
+      case 'inactive':
+        return CardStatus.inactive;
+      case 'completed':
+        return CardStatus.completed;
+      case 'onHold':
+        return CardStatus.onHold;
+      default:
+        return CardStatus.preparing;
+    }
+  }
+
+
 }
 
 enum CardStatus { preparing, active, inactive, completed, onHold }
