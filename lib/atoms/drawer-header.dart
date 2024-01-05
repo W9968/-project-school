@@ -1,11 +1,37 @@
+import 'package:frema/main.dart';
 import 'package:flutter/material.dart';
 import 'package:frema/screen/login.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class DrawerHaeaderCust extends StatelessWidget {
-  const DrawerHaeaderCust({super.key});
+class DrawerHeaderCustom extends StatelessWidget {
+  final String email;
+  final String username;
+  final String avatar;
+
+  const DrawerHeaderCustom(
+      {super.key,
+      required this.email,
+      required this.username,
+      required this.avatar});
 
   @override
   Widget build(BuildContext context) {
+    Future<void> signOut() async {
+      try {
+        await supabase.auth.signOut();
+      } on AuthException catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.message),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      } finally {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const Login()));
+      }
+    }
+
     return Container(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -29,7 +55,7 @@ class DrawerHaeaderCust extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(100.0),
                       child: Image.network(
-                        'https://buzzly.info/upload/1769/5705d4c005efeff0ce92ec1ec57ac130.jpg',
+                        avatar,
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover,
@@ -39,15 +65,15 @@ class DrawerHaeaderCust extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('John Doe',
+                          Text(email,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                   color:
                                       Theme.of(context).colorScheme.onSurface)),
-                          const Text(
-                            '@working',
-                            style: TextStyle(
+                          Text(
+                            username,
+                            style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w400),
                           )
                         ]),
@@ -60,10 +86,7 @@ class DrawerHaeaderCust extends StatelessWidget {
                     backgroundColor: MaterialStatePropertyAll<Color>(
                         Theme.of(context).colorScheme.secondaryContainer),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const Login()));
-                  },
+                  onPressed: signOut,
                   child: Row(
                     children: [
                       Text('Sign Out',

@@ -9,6 +9,7 @@ class UserRegister {
     this.password = "",
   });
 
+
   String get getUsername => username;
   set setUsername(String username) => this.username = username;
 

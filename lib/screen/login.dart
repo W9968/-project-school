@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frema/atoms/input.dart';
+import 'package:frema/main.dart';
 import 'package:frema/models/user-login.dart';
 import 'package:frema/screen/dashboard.dart';
 import 'package:frema/screen/register.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -13,8 +14,54 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool _isLoading = false;
+
   final key = GlobalKey<FormState>();
   var userLogin = UserLogin();
+
+Future<void> signInWithCredentials(UserLogin req) async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      final AuthResponse res = await supabase.auth.signInWithPassword(
+        email: req.getEmail,
+        password: req.getPassword,
+      );
+
+      final User? user = res.user;
+
+      if (user != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text("Welcome!"),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+          ),
+        );
+
+        if (mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const Dashboard(),
+            ),
+          );
+        }
+      }
+    } on AuthException catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.message),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,11 +139,7 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           if (key.currentState!.validate()) {
                             key.currentState!.save();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const Dashboard(),
-                              ),
-                            );
+                            signInWithCredentials(userLogin);
                           } else {
                             print("error");
                           }
@@ -109,7 +152,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         child: Text(
-                          "Sign in",
+                          _isLoading ? "loading" : "Sign in",
                           style: TextStyle(
                             fontSize: 16,
                             color: Theme.of(context).colorScheme.onPrimary,
