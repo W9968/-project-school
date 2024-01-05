@@ -4,20 +4,23 @@ class Freelance {
   int? id;
   String title;
   String subTitle;
-  String status; // Update the type to CardStatus
+
+  int phase;
+  String status;
+  
   String startDate;
   String endDate;
-  int phase;
+  
+  String clientName;
 
   String stack;
-  String clientName;
-  String description;
+  String description; 
 
   Freelance({
     this.id,
     this.title = "",
     this.subTitle = "",
-    this.status = "",
+    this.status = "preparing",
     this.startDate = "",
     this.endDate = "",
     this.phase = 0,

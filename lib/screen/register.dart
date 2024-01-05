@@ -26,7 +26,7 @@ class _RegisterState extends State<Register> {
               height: 124.0,
               width: MediaQuery.of(context).size.width,
               padding:
-                  const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+                  const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 24.0),
               color: Theme.of(context).colorScheme.surface,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -52,7 +52,7 @@ class _RegisterState extends State<Register> {
             ),
             const Divider(),
             Container(
-              padding: const EdgeInsets.only(top: 8.0, left: 24.0, right: 24.0),
+              padding: const EdgeInsets.all(10.0),
               color: Theme.of(context).colorScheme.background,
               child: Form(
                 key: key,

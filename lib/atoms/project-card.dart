@@ -9,6 +9,8 @@ class ProjectCard extends StatelessWidget {
   final int phase;
   final String stack;
 
+  final void Function()? onTap;
+
   const ProjectCard({
     Key? key,
     required this.cardTitle,
@@ -18,6 +20,7 @@ class ProjectCard extends StatelessWidget {
     required this.endDate,
     this.phase = 1,
     required this.stack,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -25,7 +28,9 @@ class ProjectCard extends StatelessWidget {
     Duration duration = endDate.difference(startDate);
     String durationText = _getDurationText(duration);
 
-    return Card(
+    return GestureDetector(
+        onTap: onTap,
+        child: Card(
       shadowColor: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -129,7 +134,7 @@ class ProjectCard extends StatelessWidget {
           ),
         ],
       ),
-    );
+        ));
   }
 
   Color _getStatusColor(CardStatus status, BuildContext context) {

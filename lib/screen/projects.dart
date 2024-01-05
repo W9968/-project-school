@@ -4,6 +4,7 @@ import 'package:frema/atoms/project-card.dart';
 import 'package:frema/atoms/project-floating-button.dart';
 import 'package:frema/composable/side-drawer.dart';
 import 'package:frema/models/freelance.dart';
+import 'package:frema/screen/project-add.dart';
 
 class Project extends StatefulWidget {
   const Project({Key? key}) : super(key: key);
@@ -27,8 +28,6 @@ class _ProjectState extends State<Project> {
     final List<Map<String, dynamic>> rows =
         await supabase.from('datatable_project').select('*');
 
-    print("rows $rows");
-
     for (var element in rows) {
       projects.add(Freelance.fromMap(element));
     }
@@ -46,7 +45,7 @@ class _ProjectState extends State<Project> {
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: const FloatingButton(),
-        body: RefreshIndicator(
+      body: RefreshIndicator(
         onRefresh: () {
           setState(() {
             _projectsFuture = _queryData();
@@ -54,7 +53,7 @@ class _ProjectState extends State<Project> {
           return _projectsFuture;
         },
           child: Container(
-          padding: const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
+          padding: const EdgeInsets.all(10.0),
           width: double.infinity,
           height: double.infinity,
             child: FutureBuilder<List<Freelance>>(
@@ -78,6 +77,13 @@ class _ProjectState extends State<Project> {
                         endDate: DateTime.parse(project.getEndDate),
                         stack: project.getStack,
                         phase: project.getPhase,
+                        onTap: () => {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ProdjectAdd(freelance: project)),
+                          )
+                        },
                       );
                     },
                   );

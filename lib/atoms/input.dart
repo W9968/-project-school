@@ -13,6 +13,8 @@ class Input extends StatelessWidget {
 
   final String? animatedLabel;
 
+  final int? lines;
+
   const Input({
     Key? key,
     this.label,
@@ -23,6 +25,7 @@ class Input extends StatelessWidget {
     this.validator,
     this.onSaved,
     this.animatedLabel,
+    this.lines = 1,
   }) : super(key: key);
 
   @override
@@ -31,11 +34,12 @@ class Input extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label != null)
-          Text(
-            label!,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        const SizedBox(height: 8.0),
+          Text(label!,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                fontSize: 14.0,
+              )),
+        const SizedBox(height: 4.0),
         TextFormField(
           decoration: InputDecoration(
             fillColor: Theme.of(context).colorScheme.surfaceVariant,
@@ -65,6 +69,11 @@ class Input extends StatelessWidget {
             label: animatedLabel != null ? Text(animatedLabel!) : null,
             prefixIcon: icon != null ? Icon(icon) : null,
           ),
+          style: const TextStyle(
+            fontSize: 14.0,
+          ),
+          minLines: lines,
+          maxLines: (lines ?? 1),
           validator: validator,
           onSaved: onSaved,
           obscureText: isPassword,

@@ -32,7 +32,7 @@ class SplashScreen extends StatelessWidget {
           const SizedBox(height: 32),
           Container(
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: const Column(
                 children: [
                   Text(
@@ -57,7 +57,7 @@ class SplashScreen extends StatelessWidget {
               )),
           Container(
             width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 32.0),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
