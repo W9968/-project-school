@@ -15,6 +15,8 @@ class Input extends StatelessWidget {
 
   final int? lines;
 
+final TextEditingController? controller;
+
   const Input({
     Key? key,
     this.label,
@@ -26,6 +28,7 @@ class Input extends StatelessWidget {
     this.onSaved,
     this.animatedLabel,
     this.lines = 1,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -78,6 +81,7 @@ class Input extends StatelessWidget {
           onSaved: onSaved,
           obscureText: isPassword,
           keyboardType: keyboardType,
+          controller: controller,
         ),
       ],
     );

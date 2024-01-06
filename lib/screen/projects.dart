@@ -33,7 +33,7 @@ class _ProjectState extends State<Project> {
       final List<Map<String, dynamic>> rows = await supabase
           .from('datatable_project')
           .select('*')
-          .match({'owner_id': user.id});
+          .match({'owner_id': user.id}).order('id', ascending: false);
       for (var element in rows) {
         projects.add(Freelance.fromMap(element));
       }
