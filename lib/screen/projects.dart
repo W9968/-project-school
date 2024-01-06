@@ -90,6 +90,7 @@ class _ProjectState extends State<Project> {
                         endDate: DateTime.parse(project.getEndDate),
                         stack: project.getStack,
                         phase: project.getPhase,
+                        price: project.getPrice,
                         onTap: () => {
                           Navigator.of(context).push(
                             MaterialPageRoute(

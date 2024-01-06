@@ -8,6 +8,7 @@ class ProjectCard extends StatelessWidget {
   final DateTime endDate;
   final int phase;
   final String stack;
+  final String price;
 
   final void Function()? onTap;
 
@@ -20,6 +21,7 @@ class ProjectCard extends StatelessWidget {
     required this.endDate,
     this.phase = 1,
     required this.stack,
+    required this.price,
     this.onTap,
   }) : super(key: key);
 
@@ -29,61 +31,41 @@ class ProjectCard extends StatelessWidget {
     String durationText = _getDurationText(duration);
 
     return GestureDetector(
-        onTap: onTap,
-        child: Card(
-      shadowColor: Colors.transparent,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: Icon(
-              Icons.folder_rounded,
-              color: Theme.of(context).colorScheme.primary,
+      onTap: onTap,
+      child: Card(
+        shadowColor: Colors.transparent,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(
+                Icons.folder_rounded,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              title: Text(
+                cardTitle,
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+              ),
+              subtitle: Text(cardSubtitle),
             ),
-            title: Text(
-              cardTitle,
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+            Container(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(stack),
+              ),
             ),
-            subtitle: Text(cardSubtitle),
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: SizedBox(
-              width: double.infinity,
-              child: Text(stack),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: [
-                  SizedBox(
-                      width: 125,
-                      child: TextButton(
-                          onPressed: null,
-                          child: Row(
-                            children: [
-                              Icon(
-                                _getIconBasedOnStatus(_parseStatus(cardStatus)),
-                                color: _getStatusColor(
-                                    _parseStatus(cardStatus), context),
-                                size: 16,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(cardStatus,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: _getStatusColor(
-                                        _parseStatus(cardStatus), context),
-                                  ))
-                            ],
-                          ))),
-                  const SizedBox(width: 8),
-                  SizedBox(
-                    width: 100,
-                    child: Row(
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween, // Add this line
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 8),
+                    Row(
                       children: [
                         const Text('Phase',
                             style: TextStyle(
@@ -96,45 +78,75 @@ class ProjectCard extends StatelessWidget {
                           height: 18,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4),
-                              //border color
                               border: Border.all(
                                 width: 1.5,
                                 color: Theme.of(context).colorScheme.tertiary,
                               )),
                           child: Center(
-                              child: Text(phase.toString(),
+                              child: Text((phase + 1).toString(),
                                   style: const TextStyle(
                                       fontSize: 9,
-                                      fontWeight: FontWeight.w500
-                                  ))),
-                        )
+                                      fontWeight: FontWeight.w500))),
+                        ),
                       ],
                     ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.attach_money_rounded,
+                      size: 16,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(price.toString(),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.av_timer_rounded,
+                      size: 16,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(durationText,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ],
+                ),
+                TextButton(
+                  onPressed: null,
+                  child: Row(
+                    children: [
+                      Icon(
+                        _getIconBasedOnStatus(_parseStatus(cardStatus)),
+                        color:
+                            _getStatusColor(_parseStatus(cardStatus), context),
+                        size: 16,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(cardStatus,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: _getStatusColor(
+                                _parseStatus(cardStatus), context),
+                          ))
+                    ],
                   ),
-                  const SizedBox(width: 8),
-                  SizedBox(
-                      width: 100,
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.av_timer_rounded,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(durationText,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )),
-                        ],
-                      )),
-                ],
-              ),
-            ],
-          ),
-        ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-        ));
+    );
   }
 
   Color _getStatusColor(CardStatus status, BuildContext context) {
@@ -201,8 +213,6 @@ class ProjectCard extends StatelessWidget {
         return CardStatus.preparing;
     }
   }
-
-
 }
 
 enum CardStatus { preparing, active, inactive, completed, onHold }

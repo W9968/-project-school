@@ -36,7 +36,7 @@ Future<void> createUserWithEmailAndPassword(UserRegister req) async {
           {
             'userid': user.id,
             'username': req.getUsername,
-            'avatar': 'avatar',
+            'avatar': 'https://i.imgur.com/4nSdMfl.png',
             'email': user.email,
           }
         ]);

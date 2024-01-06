@@ -72,6 +72,7 @@ class _ProdjectAddState extends State<ProdjectAdd> {
       'stack': project.getStack,
       'clientName': project.getClientName,
       'description': project.getDescription,
+      'price': project.getPrice,
       'owner_id': _ownerID
     }).then((value) {
       if (value == null) {
@@ -137,6 +138,13 @@ class _ProdjectAddState extends State<ProdjectAdd> {
                   onSaved: (p0) => project.setTitle = p0!,
                 ),
                 const SizedBox(height: 16.0),
+                Input(
+                  label: 'Price',
+                  keyboardType: TextInputType.number,
+                  placeholder: "Type your project price",
+                  validator: (p0) => p0!.isEmpty ? "Price is required" : null,
+                  onSaved: (p0) => project.setPrice = p0!,
+                ),
                 Input(
                   lines: 2,
                   label: 'Summary',

@@ -16,6 +16,8 @@ class Freelance {
   String stack;
   String description;
 
+  String price;
+
   Freelance({
     this.id,
     this.title = "",
@@ -27,6 +29,7 @@ class Freelance {
     this.stack = "",
     this.clientName = "",
     this.description = "",
+    this.price = "0.0",
   });
 
   // Getters and setters
@@ -58,6 +61,9 @@ class Freelance {
   String get getDescription => description;
   set setDescription(String description) => this.description = description;
 
+  String get getPrice => price;
+  set setPrice(String price) => this.price = price;
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
@@ -70,6 +76,7 @@ class Freelance {
       'stack': stack,
       'clientName': clientName,
       'description': description,
+      'price': price,
     };
   }
 
@@ -85,6 +92,7 @@ class Freelance {
       stack: map['stack'] as String,
       clientName: map['clientName'] as String,
       description: map['description'] as String,
+      price: map['price'] as String,
     );
   }
 
