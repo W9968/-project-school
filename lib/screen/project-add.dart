@@ -3,7 +3,9 @@ import 'package:frema/atoms/drop-down.dart';
 import 'package:frema/atoms/input.dart';
 import 'package:frema/main.dart';
 import 'package:frema/models/freelance.dart';
+import 'package:frema/screen/login.dart';
 import 'package:frema/screen/projects.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProdjectAdd extends StatefulWidget {
   final Freelance? freelance;
@@ -15,14 +17,32 @@ class ProdjectAdd extends StatefulWidget {
 }
 
 class _ProdjectAddState extends State<ProdjectAdd> {
+  String _ownerID = "";
+
   final key = GlobalKey<FormState>();
   Freelance project = Freelance();
 
   @override
   void initState() {
     super.initState();
+    getCurrentUser();
     if (widget.freelance != null) {
       project = widget.freelance!;
+    }
+  }
+
+  Future<void> getCurrentUser() async {
+    final User? user = supabase.auth.currentUser;
+    if (user != null) {
+      setState(() {
+        _ownerID = user.id;
+      });
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const Login(),
+        ),
+      );
     }
   }
 
@@ -52,6 +72,7 @@ class _ProdjectAddState extends State<ProdjectAdd> {
       'stack': project.getStack,
       'clientName': project.getClientName,
       'description': project.getDescription,
+      'owner_id': _ownerID
     }).then((value) {
       if (value == null) {
         Navigator.of(context).push(
@@ -65,7 +86,6 @@ class _ProdjectAddState extends State<ProdjectAdd> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text(project.getTitle != "" ? project.getTitle : "Add Project"),

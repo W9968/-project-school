@@ -7,14 +7,14 @@ class Freelance {
 
   int phase;
   String status;
-  
+
   String startDate;
   String endDate;
   
   String clientName;
 
   String stack;
-  String description; 
+  String description;
 
   Freelance({
     this.id,

@@ -4,7 +4,9 @@ import 'package:frema/atoms/project-card.dart';
 import 'package:frema/atoms/project-floating-button.dart';
 import 'package:frema/composable/side-drawer.dart';
 import 'package:frema/models/freelance.dart';
+import 'package:frema/screen/login.dart';
 import 'package:frema/screen/project-add.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Project extends StatefulWidget {
   const Project({Key? key}) : super(key: key);
@@ -25,11 +27,22 @@ class _ProjectState extends State<Project> {
   Future<List<Freelance>> _queryData() async {
     List<Freelance> projects = [];
 
-    final List<Map<String, dynamic>> rows =
-        await supabase.from('datatable_project').select('*');
+    final User? user = supabase.auth.currentUser;
 
-    for (var element in rows) {
-      projects.add(Freelance.fromMap(element));
+    if (user != null) {
+      final List<Map<String, dynamic>> rows = await supabase
+          .from('datatable_project')
+          .select('*')
+          .match({'owner_id': user.id});
+      for (var element in rows) {
+        projects.add(Freelance.fromMap(element));
+      }
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const Login(),
+        ),
+      );
     }
 
     return projects;
@@ -52,11 +65,11 @@ class _ProjectState extends State<Project> {
           });
           return _projectsFuture;
         },
-          child: Container(
+        child: Container(
           padding: const EdgeInsets.all(10.0),
           width: double.infinity,
           height: double.infinity,
-            child: FutureBuilder<List<Freelance>>(
+          child: FutureBuilder<List<Freelance>>(
               future: _projectsFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
