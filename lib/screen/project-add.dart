@@ -145,6 +145,7 @@ class _ProdjectAddState extends State<ProdjectAdd> {
                   validator: (p0) => p0!.isEmpty ? "Price is required" : null,
                   onSaved: (p0) => project.setPrice = p0!,
                 ),
+                const SizedBox(height: 16.0),
                 Input(
                   lines: 2,
                   label: 'Summary',
